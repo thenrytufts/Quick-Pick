@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Quick Pick</title>
+</head>
+<body>
+	<script language="javascript">
+		// determine random lottery numbers
+		var random = [];
+		for (i = 0; i < 5; i++) {
+			random.push(Math.floor(Math.random() * 48) + 1);
+		}
+		var lucky = Math.floor(Math.random() * 18) + 1;
+		random.sort(function(a,b) {return a-b});
+		
+		// get users numbers as strings
+		var input = prompt("Enter your winning numbers");
+		var userLucky = prompt("Enter your lucky number");
+		var userFive = input.split(" ");
+		
+		var winnings;
+		var matches = 0;
+		var matchLucky = false;
+		var matchLuckyOutput = "You did not match the lucky number";
+
+		for (i = 0; i < random.length; i++) {
+			for (j = 0; j < userFive.length; j++) {
+				if (userFive[j] == random[i]) {
+					matches++;
+				}
+			}
+		}
+		if (lucky == userLucky) {
+			matchLucky = true;
+			matchLuckyOutput = "You matched the lucky number!"
+		}
+
+		// determine winnings when lucky ball matches
+		if (matches == 0) {
+			winnings = matchLucky ?
+			"$4" :
+			"$0";
+		}
+		else if (matches == 1) {
+			winnings = matchLucky ?
+			"$6" :
+			"$0";
+		}
+		else if (matches == 2) {
+			winnings = matchLucky ?
+			"$25" :
+			"$3";
+		}
+		else if (matches == 3) {
+			winnings = matchLucky ?
+			"$150" :
+			"$20";
+		}
+		else if (matches == 4) {
+			winnings = matchLucky ?
+			"$5,000" :
+			"$200";
+		}
+		else if (matches == 5) {
+			winnings = matchLucky ?
+			"$7,000 a WEEK for LIFE" :
+			"$25,000 a YEAR for LIFE";
+		}
+
+		document.write("The quick pick numbers are: " + random + "<br>");
+		document.write("The lucky ball number is: " + lucky + "<br>");
+		document.write("<br>");
+		document.write("Your winning numbers are: " + userFive + "<br>");
+		document.write("Your lucky ball number is: " + userLucky + "<br>");
+		document.write("<br>");
+		document.write("You matched " + matches + " numbers <br>");
+		document.write(matchLuckyOutput);
+		document.write("<br>");
+		document.write("Your winnings: " + winnings);
+	</script>
+</body>
+</html>
